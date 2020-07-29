@@ -8,6 +8,8 @@ import routes from './routes'
 import jwt from 'koa-jwt'
 import { jwtDecode } from './middlewares/koa-decode-jwt'
 
+require('dotenv').config()
+
 const app = new Koa()
 
 // This middleware adds methods to koa ctx object to support `ctx.success`, `ctx.fail` and `ctx.error`. They are used to provide a standard response format
@@ -20,7 +22,7 @@ app.use(BodyParser())
 app.use(cors())
 
 // unless the URL starts with '/public'
-app.use(jwt({ secret: 'grilo' }).unless({ path: [/^\/public/] }))
+app.use(jwt({ secret: process.env.JWT_SECRET as string }).unless({ path: [/^\/public/] }))
 
 // parse jwt payload and add to ctx.jwt
 app.use(jwtDecode())
