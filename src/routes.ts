@@ -3,10 +3,11 @@ import { Context } from 'koa'
 import createJwt from './middlewares/koa-create-jwt'
 import Joi from 'joi'
 import { validateSchema } from './utils/validateSchema'
+import { getDb } from './service/database'
 
 const router = new Router()
 
-router.get('/public/ping', async (ctx: Context) => {
+router.get('/public/test-jwt', async (ctx: Context) => {
   const token = createJwt({ id: '123456' })
   ctx.success(token)
 })
@@ -28,7 +29,7 @@ router.post('/public/login', async (ctx: Context) => {
 
   try {
     const token = createJwt({ userId: '123456', username })
-    ctx.success({token})
+    ctx.success({ token })
   } catch (err) {
     if (err.statusCode < 500) {
       ctx.fail(err.errorCode, err.message, err.statusCode)
@@ -38,7 +39,7 @@ router.post('/public/login', async (ctx: Context) => {
   }
 })
 
-router.post('/test', async (ctx: Context) => {
+router.post('/internal/test', async (ctx: Context) => {
   ctx.success(ctx.jwt)
 })
 
