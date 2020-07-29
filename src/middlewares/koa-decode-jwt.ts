@@ -1,16 +1,11 @@
 import { decode } from 'jsonwebtoken'
 import { Context } from 'koa'
 
-declare module 'koa' {
-  interface Context {
-    jwt: DecodedJwt
-  }
-}
-
 export interface DecodedJwt {
   iat: number,
   userId: string
 }
+
 const removeCustomPrefix = (obj: { [key: string]: any }) => {
   if (obj) {
     return Object.keys(obj).reduce((acc: { [key: string]: any }, key: string) => {

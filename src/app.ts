@@ -34,4 +34,4 @@ app.use(routes.routes())
 app.use(routeNotFound())
 
 app.listen(parseInt(process.env.API_PORT as string), process.env.API_HOST as string)
-console.log('Server runnig on http://localhost:3000')
+console.log(`Server runnig on http://${process.env.API_HOST}:${process.env.API_PORT}`)
