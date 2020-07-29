@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken'
 
-require('dotenv').config()
-
 type Payload = object
 
 const createJWT = (payload: Payload) => {

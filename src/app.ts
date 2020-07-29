@@ -33,5 +33,5 @@ app.use(routes.routes())
 // This middleware handle route not found cases
 app.use(routeNotFound())
 
-app.listen(3000, 'localhost')
+app.listen(parseInt(process.env.API_PORT as string), process.env.API_HOST as string)
 console.log('Server runnig on http://localhost:3000')
